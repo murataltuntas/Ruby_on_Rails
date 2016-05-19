@@ -1,0 +1,50 @@
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-align: center;  
+
+}
+
+  td {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff;
+    font-size: 20pt;
+    padding: 20px;
+    text-align: left;
+    vertical-align: bottom;
+  }
+  th {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    text-shadow: 0 0 4px #fff, -2px -15px 11px #fff, 2px 15px 11px #fff, 0 0 11px #fff;
+    font-size: 28pt;
+    height: 40pt;
+  }
+  li {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    text-shadow: 0 0 4px #fff, -2px -15px 11px #fff, 2px 15px 11px #fff, 0 0 11px #07f;
+    font-size: 15pt;
+  }
+  h1 {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    text-shadow: 0 0 4px #ccc, 0 -5px 4px #fff, 2px -10px 6px #fff, -2px -15px 11px #fff, 2px -18px 18px #fff;
+    font-size: 50pt;
+    text-align: center;
+    color: rgb(0,0,125);
+  }
+  p.new {
+    font-family: Georgia, "Arial", Times, serif;
+    text-shadow: 0 0 4px #fff, -2px -15px 11px #fff, 2px 15px 11px #fff, 0 0 11px #fff;
+    font-size: 25pt;
+  }
+  table{
+    border: 0;
+    width:100%;
+  }
+  
+  td.new {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    text-shadow: 0 0 4px #555, -2px -15px 11px #555, 2px 15px 11px #555, 0 0 11px #555, -2px -15px 15px #555, -9px 15px -15px #555;
+    font-size: 20pt;
+    padding: 20px;
+    text-align: left;
+    vertical-align: bottom;
+  }

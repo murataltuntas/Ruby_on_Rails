@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WallApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'myMain' %>
+
+</head>
+  <body>
+    
+    <h1>Listing Posts in <%= current_user.departmant %> </h1>
+    <!--
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Title</th>
+          <th>Content</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @posts.reverse.each do |post| %>
+          <tr>
+            <td><%= post.user %></td>
+            <td><%= post.title %></td>
+            <td><%= post.content %></td>
+            <td><%= link_to 'Show', post %></td>
+            <td><% if current_user && post.user == current_user %><%= link_to 'Edit', edit_post_path(post) %> <% end %> </td>
+            <td><% if current_user && post.user == current_user %><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %> <% end %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+    -->
+
+    <% @posts.reverse.each do |post| %>
+        <table border="2">
+          <tr>
+            <td>
+              <p><%= post.title %> posted by <%= post.user %> </p>
+              <p><%= time_ago_in_words post.created_at %> ago </p>
+              <p><%= post.content %></p>
+              <p><%= link_to 'Show', post %> ( <%= post.likes.count %> likes , <%= post.comments.count %>   comments )</p>
+              <p><% if current_user && post.user == current_user %><%= link_to 'Edit', edit_post_path(post) %> <% end %> </p>
+              <p><% if current_user && post.user == current_user %><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %> <% end %> </p>
+            </td>
+          </tr>
+        </table>
+    <% end %>
+
+
+    <p class="new"><%= link_to 'New Post', new_post_path %></p>
+
+  </body>
+</html>

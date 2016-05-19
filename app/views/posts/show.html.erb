@@ -1,0 +1,69 @@
+<p class="new2">
+  <strong>Usersss:</strong>
+  <%= @post.user %>
+</p>
+
+<p class="new2">
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p class="new2">
+  <strong>Content:</strong>
+  <%= @post.content %>
+</p>
+
+
+<% @ifLiked = 0  %>
+   <% @post.likes.each do |like| %>
+      <% if like.userNameLiked == current_user.nick
+        @ifLiked = 1 %>
+    <% end %> 
+<% end %>
+
+
+<b> <%= @post.likes.count %> Likes</b>
+
+  <% if @ifLiked == 0 %>
+    <%= form_for [@post,@post.likes.build] do |l| %>
+      <div class="actions">
+        <%=  l.submit "Like" %>
+      </div>
+    <% end %>
+  <% else %>
+    <% @post.likes.each do |like| %>
+      <% if current_user.nick == like.userNameLiked %> 
+        <%= button_to "Unlike", {:controller => :likes,
+      :action => 'destroy', :id => like.id , :post_id => @post.id}, :method => :delete %>
+      <% end %>
+    <% end %>
+
+
+<% end %>
+
+
+</br>
+<h2 class="new2">Comments</h2>
+<% @post.comments.each do |comment| %>
+    <p class="new2"> <%= comment.comm %> </p>
+    <p class="new"> <%= time_ago_in_words comment.created_at %> ago by <%= comment.userName %> </p>
+    <p class="new"> <% if current_user.nick == comment.userName %> <%= link_to "Delete Comment",[@post,comment], :method => :delete,:confirm => "Are you sure" %> <% end %> </p>
+<% end %>
+
+
+<%= form_for [@post,@post.comments.build] do |f| %>
+
+  <div class="field">
+    <%= f.label :comm %><br>
+    <%= f.text_area :comm %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<p class="new">
+<% if current_user && @post.user == current_user %>
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<% end %>
+<%= link_to 'Back', posts_path %>
+</p>

@@ -1,0 +1,14 @@
+<p class="new">
+  <strong>Nick:</strong>
+  <%= @user.nick %>
+</p>
+
+<p class="new">
+  <strong>Departmant:</strong>
+  <%= @user.departmant %>
+</p>
+
+<p class="new">
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
+</p>
