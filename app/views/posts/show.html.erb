@@ -1,69 +1,86 @@
-<p class="new2">
-  <strong>Usersss:</strong>
-  <%= @post.user %>
-</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WallApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'myMain' %>
 
-<p class="new2">
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+</head>
 
-<p class="new2">
-  <strong>Content:</strong>
-  <%= @post.content %>
-</p>
-
-
-<% @ifLiked = 0  %>
+  <% @ifLiked = 0  %>
    <% @post.likes.each do |like| %>
       <% if like.userNameLiked == current_user.nick
         @ifLiked = 1 %>
     <% end %> 
-<% end %>
+  <% end %>
 
 
-<b> <%= @post.likes.count %> Likes</b>
 
-  <% if @ifLiked == 0 %>
-    <%= form_for [@post,@post.likes.build] do |l| %>
-      <div class="actions">
-        <%=  l.submit "Like" %>
-      </div>
-    <% end %>
-  <% else %>
-    <% @post.likes.each do |like| %>
-      <% if current_user.nick == like.userNameLiked %> 
-        <%= button_to "Unlike", {:controller => :likes,
-      :action => 'destroy', :id => like.id , :post_id => @post.id}, :method => :delete %>
-      <% end %>
-    <% end %>
+  <body style="background-color: lightblue;">
+    <p>
+    <div style="width: 50%;margin-left: 25%;margin-right: 25%;background-color: white;">
+        <table border="2">
+          <tr>
+            <td>
+              <p><b>User : <%= @post.user %></b> </p>
+              <p> <b>Title : </b> :  <%= @post.title %> (<%= time_ago_in_words @post.created_at %> ago) </p>
+              <p><b>Post : </b></p>
+              <p><%= @post.content %></p>
+              <p><%= @post.likes.count %> Likes</p>
+              <p>
+                  <% if @ifLiked == 0 %>
+                    <%= form_for [@post,@post.likes.build] do |l| %>
+                      <div class="actions">
+                        <%=  l.submit "Like" %>
+                      </div>
+                    <% end %>
+                  <% else %>
+                    <% @post.likes.each do |like| %>
+                      <% if current_user.nick == like.userNameLiked %> 
+                        <%= button_to "Unlike", {:controller => :likes,
+                      :action => 'destroy', :id => like.id , :post_id => @post.id}, :method => :delete %>
+                      <% end %>
+                    <% end %>
+                    <% end %>
+               </p>
+              <h2 >Comments</h2>
+              <% @post.comments.each do |comment| %>
+                  <p > <%= comment.comm %> </p>
+                  <p > <%= time_ago_in_words comment.created_at %> ago by <%= comment.userName %> </p>
+                  <p > <% if current_user.nick == comment.userName %> <%= button_to "Delete Comment", {:controller => :comments,
+                      :action => 'destroy', :id => comment.id , :post_id => @post.id}, :method => :delete %>
+                      <% end %>
+                  </p>
+                  <hr>
+              <% end %>
+
+              <%= form_for [@post,@post.comments.build] do |f| %>
+
+                <div class="field">
+                  <%= f.label :yorumlar %><br>
+                  <%= f.text_area :comm %>
+                </div>
+                <div class="actions">
+                  <%= f.submit "Yorum yap"%>
+                </div>
+              <% end %>
+              <p>
+              <% if current_user && @post.user == current_user %>
+              <%= link_to 'Edit', edit_post_path(@post) %> |
+              <% end %>
+              <%= link_to 'Back', posts_path %>
+              </p>
 
 
-<% end %>
+            </td>
+          </tr>
+        </table>
+    </div>
 
 
-</br>
-<h2 class="new2">Comments</h2>
-<% @post.comments.each do |comment| %>
-    <p class="new2"> <%= comment.comm %> </p>
-    <p class="new"> <%= time_ago_in_words comment.created_at %> ago by <%= comment.userName %> </p>
-    <p class="new"> <% if current_user.nick == comment.userName %> <%= link_to "Delete Comment",[@post,comment], :method => :delete,:confirm => "Are you sure" %> <% end %> </p>
-<% end %>
 
+  </body>
 
-<%= form_for [@post,@post.comments.build] do |f| %>
-
-  <div class="field">
-    <%= f.label :comm %><br>
-    <%= f.text_area :comm %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-<p class="new">
-<% if current_user && @post.user == current_user %>
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<% end %>
-<%= link_to 'Back', posts_path %>
-</p>
+</html>

@@ -8,9 +8,9 @@
   <%= stylesheet_link_tag 'myMain' %>
 
 </head>
-  <body>
+  <body style="background-color: lightblue;">
     
-    <h1>Listing Posts in <%= current_user.departmant %> </h1>
+    <h1> <%= current_user.departmant %> Bölümü </h1>
     <!--
     <table>
       <thead>
@@ -38,12 +38,12 @@
 
     <br>
     -->
-
+    <div style="width: 50%;margin-left: 25%;margin-right: 25%;background-color: white;">
     <% @posts.reverse.each do |post| %>
         <table border="2">
           <tr>
             <td>
-              <p><%= post.title %> posted by <%= post.user %> </p>
+              <p><%= post.title %> posted by <b><%= post.user %></b> </p>
               <p><%= time_ago_in_words post.created_at %> ago </p>
               <p><%= post.content %></p>
               <p><%= link_to 'Show', post %> ( <%= post.likes.count %> likes , <%= post.comments.count %>   comments )</p>
@@ -55,7 +55,7 @@
     <% end %>
 
 
-    <p class="new"><%= link_to 'New Post', new_post_path %></p>
-
+      <p class="new"><%= link_to 'New Post', new_post_path %></p>
+    </div>
   </body>
 </html>
