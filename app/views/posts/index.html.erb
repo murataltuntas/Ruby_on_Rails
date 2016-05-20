@@ -39,6 +39,7 @@
     <br>
     -->
     <div style="width: 50%;margin-left: 25%;margin-right: 25%;background-color: white;">
+    <p style="background-color: lightblue;"><b><%= link_to 'Yeni gönderi', new_post_path %></b></p>
     <% @posts.reverse.each do |post| %>
         <table border="2">
           <tr>
@@ -46,16 +47,15 @@
               <p><%= post.title %> posted by <b><%= post.user %></b> </p>
               <p><%= time_ago_in_words post.created_at %> ago </p>
               <p><%= post.content %></p>
-              <p><%= link_to 'Show', post %> ( <%= post.likes.count %> likes , <%= post.comments.count %>   comments )</p>
-              <p><% if current_user && post.user == current_user %><%= link_to 'Edit', edit_post_path(post) %> <% end %> </p>
-              <p><% if current_user && post.user == current_user %><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %> <% end %> </p>
+              <p><%= link_to 'Göster', post %> ( <%= post.likes.count %> beğeni , <%= post.comments.count %>   yorum )</p>
+              <p><% if current_user && post.user == current_user %><%= link_to 'Düzenle', edit_post_path(post) %> <% end %> </p>
+              <p><% if current_user && post.user == current_user %><%= link_to 'Sil', post, method: :delete, data: { confirm: 'Are you sure?' } %> <% end %> </p>
             </td>
           </tr>
-        </table>
+        </table>      
     <% end %>
 
 
-      <p class="new"><%= link_to 'New Post', new_post_path %></p>
     </div>
   </body>
 </html>

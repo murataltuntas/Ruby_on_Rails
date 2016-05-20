@@ -25,7 +25,7 @@
           <tr>
             <td>
               <p><b>User : <%= @post.user %></b> </p>
-              <p> <b>Title : </b> :  <%= @post.title %> (<%= time_ago_in_words @post.created_at %> ago) </p>
+              <p> <b>Title : </b>   <%= @post.title %> (<%= time_ago_in_words @post.created_at %> ago) </p>
               <p><b>Post : </b></p>
               <p><%= @post.content %></p>
               <p><%= @post.likes.count %> Likes</p>
@@ -45,11 +45,11 @@
                     <% end %>
                     <% end %>
                </p>
-              <h2 >Comments</h2>
+              <h2 >Yorumlar</h2>
               <% @post.comments.each do |comment| %>
                   <p > <%= comment.comm %> </p>
                   <p > <%= time_ago_in_words comment.created_at %> ago by <%= comment.userName %> </p>
-                  <p > <% if current_user.nick == comment.userName %> <%= button_to "Delete Comment", {:controller => :comments,
+                  <p > <% if current_user.nick == comment.userName %> <%= button_to "Yorumu sil", {:controller => :comments,
                       :action => 'destroy', :id => comment.id , :post_id => @post.id}, :method => :delete %>
                       <% end %>
                   </p>
@@ -59,7 +59,7 @@
               <%= form_for [@post,@post.comments.build] do |f| %>
 
                 <div class="field">
-                  <%= f.label :yorumlar %><br>
+                  <%= f.label :yorum %><br>
                   <%= f.text_area :comm %>
                 </div>
                 <div class="actions">
@@ -68,9 +68,9 @@
               <% end %>
               <p>
               <% if current_user && @post.user == current_user %>
-              <%= link_to 'Edit', edit_post_path(@post) %> |
+              <%= link_to 'Düzenle', edit_post_path(@post) %> |
               <% end %>
-              <%= link_to 'Back', posts_path %>
+              <%= link_to 'Geri dön', posts_path %>
               </p>
 
 

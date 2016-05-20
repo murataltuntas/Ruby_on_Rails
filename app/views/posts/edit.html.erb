@@ -1,8 +1,34 @@
-<h1>Editing Post</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WallApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'myMain' %>
 
-<%= render 'form' %>
+</head>
 
-<p class="new">
-<%= link_to 'Show', @post %> |
-<%= link_to 'Back', posts_path %>
-</p>
+<body style="background-color: lightblue;">
+    <p>
+    <div style="width: 50%;margin-left: 25%;margin-right: 25%;background-color: white;">
+        <table border="2">
+          <tr>
+            <td>
+				<h1>Editing Post</h1>
+				<%= render 'form' %>
+				<p>
+				<%= link_to 'Göster', @post %> |
+				<%= link_to 'Geri dön', posts_path %>
+				</p>             
+
+            </td>
+          </tr>
+        </table>
+    </div>
+
+
+
+</html>
+
+

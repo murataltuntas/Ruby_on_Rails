@@ -1,5 +1,6 @@
 class LikesController < ApplicationController
   before_action :set_like, only: [:show, :edit, :update, :destroy]
+
   # GET /likes
   def index
     @likes = Like.all
@@ -55,5 +56,11 @@ class LikesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def like_params
+    end
+
+    def getAdmin
+      if current_user.nick != "admin"
+        redirect_to login_url, alert: "Not authorized! Please login as admin."
+      end
     end
 end

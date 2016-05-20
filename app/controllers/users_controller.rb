@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
   # GET /users
   def index
     @users = User.all
@@ -56,4 +55,13 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:nick, :departmant, :password, :password_confirmation)
     end
+
+    def getAdmin
+      if current_user.nick != "admin"
+        redirect_to login_url, alert: "Not authorized! Please login as admin."
+      end
+    end
+
+
+
 end
