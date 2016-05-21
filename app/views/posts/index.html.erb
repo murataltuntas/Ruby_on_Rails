@@ -8,7 +8,7 @@
   <%= stylesheet_link_tag 'myMain' %>
 
 </head>
-  <body style="background-color: lightblue;">
+  <body style="background-color: lightblue;" >
     
     <h1> <%= current_user.departmant %> Bölümü </h1>
     <!--
@@ -43,14 +43,16 @@
     <% @posts.reverse.each do |post| %>
         <table border="2">
           <tr>
-            <td>
-              <p><%= post.title %> posted by <b><%= post.user %></b> </p>
-              <p><%= time_ago_in_words post.created_at %> ago </p>
-              <p><%= post.content %></p>
-              <p><%= link_to 'Göster', post %> ( <%= post.likes.count %> beğeni , <%= post.comments.count %>   yorum )</p>
-              <p><% if current_user && post.user == current_user %><%= link_to 'Düzenle', edit_post_path(post) %> <% end %> </p>
-              <p><% if current_user && post.user == current_user %><%= link_to 'Sil', post, method: :delete, data: { confirm: 'Are you sure?' } %> <% end %> </p>
-            </td>
+            <% if current_user.departmant == post.user.departmant %>
+              <td>
+                <p><%= post.title %> posted by <b><%= post.user %></b> </p>
+                <p><%= time_ago_in_words post.created_at %> ago </p>
+                <!--<p><%= post.content %></p> -->
+                <p><%= link_to 'Göster', post %> ( <%= post.likes.count %> beğeni , <%= post.comments.count %>   yorum )</p>
+                <p><% if current_user && post.user == current_user %><%= link_to 'Düzenle', edit_post_path(post) %> <% end %> </p>
+                <p><% if current_user && post.user == current_user %><%= link_to 'Sil', post, method: :delete, data: { confirm: 'Are you sure?' } %> <% end %> </p>
+              </td>
+            <% end %>
           </tr>
         </table>      
     <% end %>

@@ -33,13 +33,13 @@
                   <% if @ifLiked == 0 %>
                     <%= form_for [@post,@post.likes.build] do |l| %>
                       <div class="actions">
-                        <%=  l.submit "Like" %>
+                        <%=  l.submit "Beğen" %>
                       </div>
                     <% end %>
                   <% else %>
                     <% @post.likes.each do |like| %>
                       <% if current_user.nick == like.userNameLiked %> 
-                        <%= button_to "Unlike", {:controller => :likes,
+                        <%= button_to "Vazgeç", {:controller => :likes,
                       :action => 'destroy', :id => like.id , :post_id => @post.id}, :method => :delete %>
                       <% end %>
                     <% end %>
