@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show]
+  before_action :getAdmin, only: [:destroy]
   # GET /users
   def index
     @users = User.all
@@ -33,7 +34,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'User was successfully updated.'
+      redirect_to posts_url, notice: 'User was successfully updated.'
     else
       render :edit
     end
@@ -41,6 +42,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
+    @user = User.find(params[:id])
     @user.destroy
     redirect_to users_url, notice: 'User was successfully destroyed.'
   end

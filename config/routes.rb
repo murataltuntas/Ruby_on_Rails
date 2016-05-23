@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#destroy', as: 'logout'
   
   resources :users
-  get 'page/index'
-  root 'page#index'
+  get 'posts/index'
+  root 'posts#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
