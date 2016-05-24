@@ -59,7 +59,7 @@ class UsersController < ApplicationController
     end
 
     def getAdmin
-      if current_user.nick != "admin"
+      if current_user && current_user.nick != "admin"
         redirect_to login_url, alert: "Not authorized! Please login as admin."
       end
     end

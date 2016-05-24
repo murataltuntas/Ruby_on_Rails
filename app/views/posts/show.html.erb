@@ -28,7 +28,7 @@
               <p> <b>Title : </b>   <%= @post.title %> (<%= time_ago_in_words @post.created_at %> ago) </p>
               <p><b>Post : </b></p>
               <p><%= @post.content %></p>
-              <p><%= @post.likes.count %> Likes</p>
+              <p><%= @post.likes.count %> Beğeni</p>
               <p>
                   <% if @ifLiked == 0 %>
                     <%= form_for [@post,@post.likes.build] do |l| %>
